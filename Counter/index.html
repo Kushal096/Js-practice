@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word/CHaracter counter</title>
+    <link rel = "stylesheet" href = "style.css">
+</head>
+<body>
+    <div class="background-pattern"></div>
+    <div class="container">
+        <h1 id="title">Word & Character Counter</h1>
+        <textarea tyoe = "text" id="inbox" oninput="inputCatch()" placeholder="Start typing here..."></textarea>
+        <h2 id="countDisplay">Count: <span id="totalCount">--</span></h2>
+        <div class="toggle-container">
+            <span class="toggle-label">Words</span>
+            <label class="toggle-switch">
+                <input type="checkbox" id="countToggle">
+                <span class="slider"></span>
+            </label>
+            <span class="toggle-label">Characters</span>
+        </div>
+    </div>
+
+    
+
+    <script src = "script.js"></script>
+</body>
+</html>
