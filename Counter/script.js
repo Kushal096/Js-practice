@@ -6,14 +6,11 @@ const inputCatch = () => {
         console.log(values)
         const totalCount = document.getElementById("totalCount");
         const arr = values.trim().split(/\s+/);
-        let count = 0;
-        for (let i = 0; i < arr.length; i++) {
-            if (arr[i] === '') {
-                continue;
-            }
-            count ++
-        }
-        totalCount.innerText = count;
+        const array = arr.filter((element) =>{
+            return element != "";
+        })
+
+        totalCount.innerText = array.length;
     }
     else {
         const values = document.querySelector("#inbox").value;
