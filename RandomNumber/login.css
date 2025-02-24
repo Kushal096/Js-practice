@@ -1,0 +1,226 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: linear-gradient(135deg, #f0f2f5 0%, #e0e2e5 100%);
+    padding: 20px;
+}
+
+.container {
+    background: #fff;
+    border-radius: 12px;
+    padding: 30px;
+    width: 100%;
+    max-width: 400px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    text-align: left;
+}
+
+h2 {
+    color: #1a1a1a;
+    margin-bottom: 25px;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+form {
+    padding: 10px 0;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    color: #333;
+    margin-bottom: 8px;
+    font-weight: 500;
+    font-size: 14px;
+}
+
+#name, #difficulty {
+    padding: 12px;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+    background-color: #fff;
+}
+
+#name:focus, #difficulty:focus {
+    outline: none;
+    border-color: #4ae26b;
+    box-shadow: 0 0 0 3px rgba(74, 226, 107, 0.2);
+}
+
+#name::placeholder {
+    color: #999;
+}
+
+#difficulty {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23333%22%20d%3D%22M287%2069.4a17.6%2017.6%200%200%200-13-5.4H18.4c-5%200-9.3%201.8-12.9%205.4A17.6%2017.6%200%200%200%200%2082.2c0%205%201.8%209.3%205.4%2012.9l128%20127.9c3.6%203.6%207.8%205.4%2012.8%205.4s9.2-1.8%2012.8-5.4L287%2095c3.5-3.5%205.4-7.8%205.4-12.8%200-5-1.9-9.2-5.4-12.8z%22%2F%3E%3C%2Fsvg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 12px;
+}
+
+#btn, #leaderboard {
+    width: 100%;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+#btn {
+    background-color: #4ae26b;
+    color: white;
+    margin-bottom: 12px;
+}
+
+#btn:hover {
+    background-color: #3bc757;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(74, 226, 107, 0.2);
+}
+
+#btn:active {
+    transform: translateY(0);
+}
+
+#leaderboard {
+    background-color: #f5f5f5;
+    color: #333;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    border: 2px solid #eee;
+}
+
+#leaderboard:hover {
+    background-color: #eee;
+    transform: translateY(-1px);
+}
+
+.dashboard {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 500px;
+    max-height: 80vh;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    border-radius: 16px;
+    overflow-y: auto;
+}
+
+.dashboard h2 {
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 20px;
+    border-bottom: 2px solid #eee;
+    margin-bottom: 20px;
+}
+
+.dashboard p {
+    font-size: 24px;
+    color: #666;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dashboard p:hover {
+    color: #333;
+    transform: scale(1.1);
+}
+
+.dashboard ol {
+    list-style-position: inside;
+    padding: 0;
+}
+
+.dashboard li {
+    padding: 12px;
+    border-bottom: 1px solid #eee;
+    color: #333;
+    font-size: 16px;
+}
+
+
+
+.snackbar {
+    visibility: hidden;
+    min-width: 280px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 8px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1000;
+    left: 50%;
+    bottom: 30px;
+    transform: translateX(-50%);
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.snackbar.show {
+    visibility: visible;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+.dashboard::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: -1;
+}
