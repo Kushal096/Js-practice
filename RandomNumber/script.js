@@ -76,7 +76,6 @@ function randomNum(){
     if (randomNumber === null){
         let maxValue = Number(document.getElementById("input").getAttribute("max"));
         randomNumber = Math.floor(Math.random() * (maxValue+1));
-        console.log(randomNumber)
     }
 
 }
