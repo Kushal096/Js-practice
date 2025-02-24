@@ -27,7 +27,7 @@ function startGame(e) {
                     localStorage.setItem(key, JSON.stringify(newGameData));
                     localStorage.setItem("LastSign", JSON.stringify(newGameData.playerName))
                     check = false;
-                    window.location.replace("index.html")
+                    window.location.replace("home.html")
                     break
                 }
                 

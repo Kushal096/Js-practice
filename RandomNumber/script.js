@@ -389,7 +389,7 @@ function rules() {
 
 function newGame(event) {
     event.preventDefault();
-    window.location.replace("login.html");
+    window.location.replace("index.html");
 }
 
 
