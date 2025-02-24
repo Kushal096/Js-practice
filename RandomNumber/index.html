@@ -4,33 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Number Guessing Game</title>
-    <link rel = "stylesheet" href = "style.css">
+    <link rel="stylesheet" href="login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
-    <div class = "container">
-        <h2>Number guessing Game</h2>
-        <h3 id = "heading">Guess the number between -- and --</h3>
-        <form method="post">
-            <input id = "input" type = "number" placeholder="Enter your guess" oninput="valideInput(this)">
-            <button id = "btn">Guess</button>
-            <button id = "newGameBtn">New Game</button>
+    <div class="container">
+        <h2>Number Guessing Game</h2>
+        
+        <form>
+            <div class="formGroup">
+                <label for="name">Enter Your Name</label>
+                <input id="name" type="text" placeholder="Your name" required>
+            </div>
+
+            <div class="formGroup">
+                <label for="difficulty">Select Difficulty</label>
+                <select id="difficulty" name="option" required>
+                    <option value="0" disabled selected hidden>Choose the level</option>
+                    <option value="1">Easy Level (0-50)</option>
+                    <option value="2">Medium Level (0-100)</option>
+                    <option value="3">Hard Level (0-200)</option>
+                </select>
+            </div>
+
+            <button id="btn" type="submit">Start Game</button>
+            
         </form>
-        <div class = "features">
-            <div class = "gameWon">Game Wins : </div>
-            <div class = "hints">Hint: </div>
-            <div class = "yourScore">Your Score : </div>
-            <div class = "winRate">Win Rate:</div>
-        </div>
-        <div class = "prevGuess">Previous Guesses : </div>
-        <div class = "bottom">
-            <button id = "saveBtn">Save Game Data</button>
-            <button id = "rulesBtn">Rules</button>
-        </div>
-        
-        
+        <button id="leaderboard">
+            <i class="fa-solid fa-crown"></i> View Leaderboard
+        </button>
 
-
+        
     </div>
-    <script src = "script.js"></script>
+    <script src="login.js"></script>
 </body>
 </html>
