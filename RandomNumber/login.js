@@ -12,13 +12,13 @@ function startGame(e) {
     const name = document.getElementById("name").value
     const level = document.getElementById("difficulty").value
     let check = true
-    if (name == ""  || level == 0){
+    if (name == "" || level == 0) {
         snackBar("Login Error !")
     }
-    else{
-        for (let key of Object.keys(localStorage) ){
+    else {
+        for (let key of Object.keys(localStorage)) {
 
-        
+
             const gameData = localStorage.getItem(key);
             try {
                 const newGameData = JSON.parse(gameData);
@@ -30,30 +30,30 @@ function startGame(e) {
                     window.location.replace("home.html")
                     break
                 }
-                
+
             } catch (e) {
                 console.log("An error occured :", e)
             }
         }
-    
-        if (check){
+
+        if (check) {
             let gameData = {
-            playerName : name,
-            playerLevel :level
+                playerName: name,
+                playerLevel: level
             }
-        localStorage.setItem(localStorage.length+1,JSON.stringify(gameData))
-        localStorage.setItem("LastSign", JSON.stringify(gameData.playerName))
-        window.location.replace("index.html")
-            
-        
+            localStorage.setItem(localStorage.length + 1, JSON.stringify(gameData))
+            localStorage.setItem("LastSign", JSON.stringify(gameData.playerName))
+            window.location.replace("home.html")
+
+
         }
 
-        
+
     }
 
 }
 
-function leaderboard(){
+function leaderboard() {
     const newDiv = document.createElement("div")
     newDiv.classList.add("dashboard")
     const h2 = document.createElement("h2")
@@ -62,11 +62,11 @@ function leaderboard(){
     img.id = "backButton"
     img.innerHTML = '<i class="fa-solid fa-square-xmark"></i>'
     h2.appendChild(img);
-    
+
     h2.appendChild(img);
     newDiv.appendChild(h2)
     document.body.appendChild(newDiv)
-    document.getElementById("backButton").addEventListener("click",() => {
+    document.getElementById("backButton").addEventListener("click", () => {
         document.body.removeChild(newDiv)
     })
     let leaders = top10()
@@ -86,20 +86,20 @@ function leaderboard(){
 }
 
 
-function top10(){
+function top10() {
     arr = []
-    for (key of Object.keys(localStorage)){
+    for (key of Object.keys(localStorage)) {
         const gameData = localStorage.getItem(key)
         const newGameData = JSON.parse(gameData)
         try {
-            if ("score" in newGameData){
+            if ("score" in newGameData) {
                 arr.push(`${newGameData.playerName} : ${newGameData.score}`)
             }
         }
-        catch(e){
+        catch (e) {
             console.log(`Error occured : ${e}`)
         }
-    return arr
+        return arr
     }
 }
 const snackBar = (message) => {
