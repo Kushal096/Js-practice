@@ -162,7 +162,7 @@ form #newGameBtn{
     flex:wrap;
 }
 
-#saveBtn ,#rulesBtn {
+#rulesBtn {
     padding :1.5rem;
     border-radius: 10px;
     border: none;
@@ -175,7 +175,7 @@ form #newGameBtn{
 
 }
 
-#saveBtn:hover , #rulesBtn:hover {
+#rulesBtn:hover {
     transform: translateY(-2px);
     background: #306bca ;
 }

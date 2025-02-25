@@ -5,9 +5,6 @@ document.addEventListener("DOMContentLoaded", function() {
     const rulesButton = document.getElementById("rulesBtn");
     rulesButton.addEventListener("click", () => { rules() });
 
-    const saveDataButton = document.getElementById("saveBtn");
-    saveDataButton.addEventListener("click", saveGameData);
-
     const newGameButton = document.getElementById("newGameBtn");
     newGameButton.addEventListener("click", (event) =>newGame(event));
 });
@@ -195,6 +192,7 @@ function checkWin(guess){
     if (guess == randomNumber){
         gameWin()
         const input = document.getElementById("input");
+        saveGameData()
         input.disabled= true
 
     }
@@ -246,9 +244,7 @@ function winRate(){
     totalGames += 1;
     let wonGames = Number(document.getElementById("gameWonId").innerText); 
     let winRateBox = document.getElementById("winRateId");
-    winRateBox.innerText = (Number(wonGames) / Number(totalGames)) * 100;
-    console.log(wonGames)
-    console.log(totalGames)
+    winRateBox.innerText = `${((Number(wonGames) / Number(totalGames)) * 100).toFixed(2)}`;
 }
 
 
@@ -307,6 +303,7 @@ function checkAttempts() {
         score(false);
         input.disabled = true;
         winRate()
+        saveGameData()
     }
 }
 
@@ -335,7 +332,9 @@ function saveGameData(){
                     newGameData.gameWin = gameBox;
                     newGameData.score = scoreBox;
                     newGameData.winRate = winRateBox;
+                    console.log(newGameData.winRate)
                     newGameData.totalGames = totalGames;
+                    console.log(totalGames)
                     localStorage.setItem(i,JSON.stringify(newGameData))
                     
                 }
