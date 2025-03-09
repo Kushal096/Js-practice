@@ -1,0 +1,242 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    cursor: default;
+    user-select: none;
+}
+
+:root {
+    --primary-color: #FF5733;
+    --secondary-color: #28A745;
+    --accent-color: #FFD700;
+    --background-color: #f8f8f3;
+    --text-color: #333333;
+    --button-color: #FF8C00;
+    --neutral-color: #D3D3D3;
+}
+
+body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    line-height: 1.6;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    padding: 28px;
+    background: var(--primary-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    width: 100%;
+}
+
+nav i {
+    font-size: 2rem;
+    margin-right: 20px;
+}
+
+nav h1 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-left: 20px;
+}
+
+#slogan {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+    font-size: 1.5rem;
+    color: var(--text-color);
+    transition: transform 0.3s ease-in;
+}
+
+#slogan h1 {
+    filter: drop-shadow(1px 1px 1px var(--text-color));
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#slogan h1:hover {
+    transform: translate(5px, -5px) scale(1.2);
+}
+
+.input {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+}
+
+#input {
+    padding: 20px;
+    border-radius: 40px 0px 0px 40px;
+    width: 600px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    border: 1px solid transparent;
+    outline: none;
+    transition: border 0.3s ease;
+}
+
+#input:focus {
+    outline: none;
+    border: 1px solid var(--button-color);
+}
+
+#searchButton {
+    padding: 20px;
+    font-weight: 600;
+    font-size: 1.5rem;
+    border-radius: 0px 40px 40px 0px;
+    border: none;
+    background-color: var(--button-color);
+    cursor: pointer;
+    outline: none;
+    color: var(--text-color);
+    transition: background-color 0.3s ease-in-out;
+}
+
+#searchButton:hover {
+    background-color: var(--primary-color);
+}
+
+.foods {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(100px, 1fr));
+    gap: 5px;
+    margin: 10px;
+    margin-top: 30px;
+    transition: all 0.3s ease-in;
+}
+
+.foods .items:hover {
+    transform: translateY(-10px);
+    box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.items{
+    height: 320px;
+    box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.15);
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    width: 300px;
+    background: #fff;
+}
+
+.itemsImage {
+    height: 200px;
+    border-bottom: 4px solid #d1d9e0;
+    width: 300px;
+}
+
+.items h2{
+    color: var(--text-color);
+    padding: 4px;
+    text-align: center;
+}
+
+.itemsFooter{
+    display: flex;
+    justify-content: space-between;
+    margin: 15px;
+}
+
+.ratings {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+}
+
+.unfulfilled {
+    color: white;
+    margin: 0 2px;
+    text-shadow: 0 0 3px black;
+}
+
+.fulfilled{
+   color: var(--accent-color);
+   margin: 0 2px;
+   text-shadow: 0 0 3px black;
+}
+
+.itemsFooter h3{
+    color: var(--text-color);
+}
+
+@media (max-width: 1024px) {
+    .foods {
+        grid-template-columns: repeat(3, minmax(100px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    nav i, nav h1 {
+        margin: 10px 0;
+    }
+
+    #input {
+        width: 100%;
+        border-radius: 40px;
+    }
+
+    .input {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #searchButton {
+        width: 100%;
+        border-radius: 40px;
+        margin-top: 10px;
+    }
+
+    .foods {
+        grid-template-columns: 1fr;
+    }
+
+    .items{
+        margin: 10px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 20px;
+    }
+
+    nav i {
+        font-size: 1.5rem;
+    }
+
+    nav h1 {
+        font-size: 1.5rem;
+    }
+
+    #slogan {
+        font-size: 1.2rem;
+    }
+
+    #input, #searchButton {
+        font-size: 1.2rem;
+        padding: 15px;
+    }
+
+    .items {
+        width: 100%;
+    }
+
+    .itemsImage {
+        width: 100%;
+    }
+}
