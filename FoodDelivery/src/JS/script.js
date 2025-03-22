@@ -108,6 +108,9 @@ const itemDetails = [
         options: ["Rare", "Medium", "Well Done"]
     }
 ];
+
+let orderedItems = []
+
 function createItemsBox(){
     const foods = document.getElementsByClassName("foods");
     const foodsElements = itemDetails.map((item , index) => {
@@ -143,7 +146,7 @@ function createItemsBox(){
 
         return items
     })
-    console.log(itemDetails)
+    
     foodsElements.forEach(items => {
         foods[0].appendChild(items);
     })
@@ -257,7 +260,7 @@ function showItemDetails (index) {
     const quantitySection = document.createElement("div")
     quantitySection.classList = "quantitySection"
     const quantityLabel = document.createElement("label")
-    quantityLabel.innerText = "Quantity"
+    quantityLabel.innerText = "Quantity:"
     const innerSection = document.createElement("div")
     innerSection.classList = "innerSection"
     const minusButton = document.createElement("button")
@@ -266,7 +269,7 @@ function showItemDetails (index) {
     minusButton.innerText = "-";
     const quantityInput = document.createElement("input")
     quantityInput.id = "quantityInput"
-    quantityInput.setAttribute("min",0)
+    quantityInput.setAttribute("min",1)
     quantityInput.setAttribute("max",100)
     quantityInput.setAttribute("type","number")
     quantityInput.setAttribute("inputmode","numeric")
@@ -275,8 +278,40 @@ function showItemDetails (index) {
     addButton.innerText = "+";
     addButton.classList = "button"
 
-    innerSection.append(minusButton, quantityInput, addButton)
+    quantityInput.addEventListener("input", () => {
+        const inputValue = parseInt(quantityInput.value, 10);
+        if (isNaN(inputValue) || inputValue < 1) {
+            quantityInput.value = "";
+        } else if (inputValue > 100) {
+            quantityInput.value = "";
+        }
+    });
+    [minusButton, addButton].forEach((button) => {
+        button.addEventListener("click", () => {
+            const currentValue = parseInt(quantityInput.value, 10) || (button === minusButton ? 1 : 0);
+            const newValue = button === minusButton ? Math.max(1, currentValue - 1) : Math.min(100, currentValue + 1);
+            quantityInput.value = newValue;
+        });
+    });
+     innerSection.append(minusButton, quantityInput, addButton)
     quantitySection.append(quantityLabel,innerSection)
+
+
+    const addToCartButton = document.createElement("div");
+    addToCartButton.innerText = "Add to Cart"
+    addToCartButton.className = "addToCartButton"
+    addToCartButton.addEventListener("click",() => {
+        const currentValue = quantityInput.value;
+        if (!currentValue){
+            showError("Quantity cant be empty!!")
+        }
+        else{
+            activeItemDetailCard.remove();
+            activeItemDetailCard = null;
+            showError("Items added successfully")
+
+        }
+    })
 
 
     rightContainer.append(h2)
@@ -285,6 +320,7 @@ function showItemDetails (index) {
     rightContainer.appendChild(ratingPriceDiv)
     rightContainer.appendChild(optionSection)
     rightContainer.appendChild(quantitySection)
+    rightContainer.appendChild(addToCartButton)
     mainContainer.appendChild(rightContainer)
     //creating close button
     const closeButton = document.createElement("button")
@@ -299,5 +335,114 @@ function showItemDetails (index) {
 
     foods.appendChild(itemDetailCard);
     activeItemDetailCard = itemDetailCard;
+    
+}
 
+document.getElementById("finalCart").addEventListener("click", () => {
+    if (activeItemDetailCard) {
+        activeItemDetailCard.remove();
+        activeItemDetailCard = null;
+    }
+
+    const foods = document.getElementsByClassName("foods")[0];
+
+    // Creating main container for cart details
+    const cartDetailCard = document.createElement("div");
+    cartDetailCard.classList.add("itemDetailCard");
+    cartDetailCard.id = "cartDetailCard";
+
+    const mainContainer = document.createElement("div");
+    mainContainer.classList.add("mainContainer");
+    mainContainer.id = "cartMainContainer";
+
+    // Creating items section
+    const itemsSection = document.createElement("div");
+    itemsSection.classList.add("itemsSection");
+    itemsSection.id = "cartItemsSection";
+    const itemsHeader = document.createElement("h2");
+    itemsHeader.innerText = "Your Items";
+    itemsHeader.classList.add("sectionHeader");
+    itemsHeader.id = "cartItemsHeader";
+    itemsSection.appendChild(itemsHeader);
+
+    // Placeholder for cart items (can be dynamically populated later)
+    const cartItems = document.createElement("div");
+    
+    cartItems.classList.add("cartItems");
+    cartItems.id = "cartItemsPlaceholder";
+    cartItems.innerText = "No items in the cart yet.";
+    itemsSection.appendChild(cartItems);
+
+    mainContainer.appendChild(itemsSection);
+
+    // Creating personal info section
+    const personalInfoSection = document.createElement("div");
+    personalInfoSection.classList.add("personalInfoSection");
+    personalInfoSection.id = "personalInfoSection";
+    const personalInfoHeader = document.createElement("h2");
+    personalInfoHeader.innerText = "Personal Information";
+    personalInfoHeader.classList.add("sectionHeader");
+    personalInfoHeader.id = "personalInfoHeader";
+    personalInfoSection.appendChild(personalInfoHeader);
+
+    const nameInput = document.createElement("input");
+    nameInput.type = "text";
+    nameInput.placeholder = "Your Name";
+    nameInput.classList.add("personalInput");
+    nameInput.id = "nameInput";
+
+    const addressInput = document.createElement("textarea");
+    addressInput.placeholder = "Your Address";
+    addressInput.classList.add("personalInput");
+    addressInput.id = "addressInput";
+
+    personalInfoSection.appendChild(nameInput);
+    personalInfoSection.appendChild(addressInput);
+
+    mainContainer.appendChild(personalInfoSection);
+
+    // Creating place order button
+    const placeOrderButton = document.createElement("div");
+    placeOrderButton.innerText = "Place Order";
+    placeOrderButton.className = "placeOrderButton";
+    placeOrderButton.id = "placeOrderButton";
+    placeOrderButton.addEventListener("click", () => {
+        if (!nameInput.value || !addressInput.value) {
+            showError("Please fill in all personal information fields!");
+            return;
+        }
+        showError("Order placed successfully!");
+        cartDetailCard.remove();
+        activeItemDetailCard = null;
+    });
+
+    mainContainer.appendChild(placeOrderButton);
+
+    // Adding close button
+    const closeButton = document.createElement("button");
+    closeButton.innerHTML = "&times";
+    closeButton.classList = "closeButton";
+    closeButton.id = "cartCloseButton";
+    cartDetailCard.appendChild(closeButton);
+    closeButton.addEventListener("click", (e) => {
+        e.stopPropagation();
+        cartDetailCard.remove();
+        activeItemDetailCard = null;
+    });
+
+    cartDetailCard.appendChild(mainContainer);
+    foods.appendChild(cartDetailCard);
+    activeItemDetailCard = cartDetailCard;
+});
+
+const messageBox = document.createElement("div");
+messageBox.className = "messageBox";
+messageBox.style.display = "none";
+document.body.appendChild(messageBox);
+function showError(message) {
+    messageBox.innerText = message;
+    messageBox.style.display = "block";
+    setTimeout(() => {
+        messageBox.style.display = "none";
+    }, 4000);
 }

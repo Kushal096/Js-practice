@@ -469,15 +469,172 @@ margin: 0;
     animation: fadeIn 0.3s ease;
 }
 
-/* Animation keyframes */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
-    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+.addToCartButton {
+    padding: 12px 15px;
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--button-color);
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    border: none;
 }
 
-@keyframes slideUp {
-    from { transform: translateY(30px); opacity: 0; }
-    to { transform: translateY(0); opacity: 1; }
+.addToCartButton:hover {
+    background: var(--primary-color);
+    box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
+    transform: translateY(-2px);
+}
+
+.addToCartButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+}
+
+
+.messageBox {
+    position: fixed;
+    top: 20px;
+    right: -300px;
+    width: 250px;
+    padding: 15px 20px;
+    background-color: var(--primary-color);
+    color: var(--header-text);
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+    z-index: 9000;
+    animation: slideInFromTopRight 0.5s ease forwards, slideOutToTopRight 0.5s ease 4.5s forwards;
+}
+
+.messageBox .timer {
+    height: 4px;
+    background-color: var(--secondary-color);
+    width: 100%;
+    margin-top: 10px;
+    border-radius: 2px;
+    animation: shrinkTimer 4s linear forwards;
+}
+
+.itemsSection, .personalInfoSection {
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.sectionHeader {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-color);
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.cartItems {
+    padding: 15px;
+    font-size: 1rem;
+    color: #666;
+    text-align: center;
+    background-color: var(--neutral-color);
+    border-radius: 10px;
+}
+
+.personalInput {
+    width: 100%;
+    padding: 12px 15px;
+    margin-bottom: 15px;
+    border: 2px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 1rem;
+    background-color: #f9f9f9;
+    transition: all var(--transition-speed) ease;
+}
+
+.personalInput:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.2);
+}
+
+.placeOrderButton {
+    padding: 15px 20px;
+    background-color: var(--button-color);
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+.placeOrderButton:hover {
+    background-color: var(--primary-color);
+    box-shadow: 0 6px 16px rgba(255, 107, 53, 0.3);
+    transform: translateY(-2px);
+}
+
+.placeOrderButton:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.3);
+}
+
+@keyframes slideInFromTopRight {
+    from {
+        right: -300px;
+        top: -50px;
+        opacity: 0;
+    }
+    to {
+        right: 20px;
+        top: 20px;
+        opacity: 1;
+    }
+}
+
+@keyframes slideOutToTopRight {
+    from {
+        right: 20px;
+        top: 20px;
+        opacity: 1;
+    }
+    to {
+        right: -300px;
+        top: -50px;
+        opacity: 0;
+    }
+}
+
+@keyframes shrinkTimer {
+    from {
+        width: 100%;
+    }
+    to {
+        width: 0;
+    }
+}
+
+/* Additional smooth fade-in effect for the timer */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 /* Media queries for responsiveness */
